@@ -1,1 +1,2 @@
-i
+ 
+        # "firefox": webdriver.Firefox(GeckoDriverManager()), 
