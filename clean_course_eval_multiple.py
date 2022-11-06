@@ -31,7 +31,7 @@ import moodle_login
 # TODO: Write scripts to install requirements for different os
 
 
-def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng/login/index.php", select_values = [
+def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select_values = [
     'A', 
     'D',
     'D', 
@@ -63,7 +63,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng/login/in
     'A', 
     'Dr. ', 
     'G'
-], submit = False):
+], submit = False, lecturer = False):
     """
     It takes in a list of values and then uses those values to fill in a form on a webpage
     
@@ -127,7 +127,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng/login/in
                     url = driver.find_element(By.LINK_TEXT, 'Answer the questions').get_attribute('href')
                     driver.find_element(By.LINK_TEXT, 'Answer the questions').click()
 
-                    fill_eval.fill_eval(driver=driver, url=url, elements=select_values)
+                    fill_eval.fill_eval(driver=driver, url=url, elements=select_values, submit=submit, lecturer=lecturer)
 
                     driver.execute_script("window.history.go(-2)")
 
@@ -176,7 +176,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng/login/in
                                                     print(f'{navigate_options_value[i]}: New course evaluation found')
                                                     url = driver.find_element(By.LINK_TEXT, 'Answer the questions').get_attribute('href')
                                                     driver.find_element(By.LINK_TEXT, 'Answer the questions').click()
-                                                    fill_eval.fill_eval(driver=driver, url=url, elements=select_values)
+                                                    fill_eval.fill_eval(driver=driver, url=url, elements=select_values, submit=submit, lecturer=lecturer)
 
 
                                                 except AssertionError:
@@ -199,5 +199,3 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng/login/in
     driver.close()
     driver.quit()
 
-
-autoCourseEval()
