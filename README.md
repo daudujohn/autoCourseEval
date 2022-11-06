@@ -8,8 +8,8 @@ autoCourseEval is a web scraping project. The university course evaluation is us
 - Create a .env file inside the main autoCourseEval folder
 - Let the .env file contain a username and a password 
 - Open main.py
-- Set the `submit` parameter to `True` to allow autoCourseEval submit the form
-- Set the `Lecturer` parameter to `True` to fill in lecturer names for each week yourself
+- Set the `submit` arguement to `True` to allow autoCourseEval submit the form
+- Set the `Lecturer` arguement to `True` to fill in lecturer names for each week yourself
 - Run main.py
 
 **Note**: Run autoCourseEval in a virtual environment to prevent dependencies from conflicting.
