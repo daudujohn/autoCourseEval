@@ -5,6 +5,10 @@ Currently supports chrome (v105, v106, v107), edge (v105, v106, v107) on Windows
 autoCourseEval is a web scraping project. The university course evaluation is used to obtain genuine feedback from verified students on course activity each week. The outcome  might be taken into account when deciding whether to promote or increase the pay of a course lecturer. Although the autoCourseEval project has no negative effects on a lecturer's status, it provides the same feedback regardless of the events that occurs each week. Overall, autoCourseEval does not substitute manual filling; you are still responsible for completing your forms each week.
 
 ## Instructions
+- Install the dependencies
+```Shell
+pip install -r requirements.txt
+```
 - Create a .env file inside the main autoCourseEval folder
 - Let the .env file contain a username and a password 
 - Open main.py
