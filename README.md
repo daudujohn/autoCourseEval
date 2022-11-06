@@ -4,6 +4,16 @@ Currently supports chrome (v105, v106, v107), edge (v105, v106, v107) on Windows
 ## *Disclaimer:*
 autoCourseEval is a web scraping project. The university course evaluation is used to obtain genuine feedback from verified students on course activity each week. The outcome  might be taken into account when deciding whether to promote or increase the pay of a course lecturer. Although the autoCourseEval project has no negative effects on a lecturer's status, it provides the same feedback regardless of the events that occurs each week. Overall, autoCourseEval does not substitute manual filling; you are still responsible for completing your forms each week.
 
+## Instructions
+- Create a .env file inside the main autoCourseEval folder
+- Let the .env file contain a username and a password 
+- Open main.py
+- Set the `submit` parameter to `True` to allow autoCourseEval submit the form
+- Set the `Lecturer` parameter to `True` to fill in lecturer names for each week yourself
+- Run main.py
+
+**Note**: Run autoCourseEval in a virtual environment to prevent dependencies from conflicting.
+
 ## Documentation
 call the `help()` function on a method to see its documentation.
 ```python
@@ -39,5 +49,3 @@ Tests for autoCourseEval were held under bandwidth speeds of **at least 1mb per 
 2. chrome://flags -> Search for WebGL in the search bar -> Enable / Activate WebGL
 
 There are much better instructions [here](https://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser)
-
-**Note**: Run autoCourseEval in a virtual environment to prevent dependencies from conflicting.
