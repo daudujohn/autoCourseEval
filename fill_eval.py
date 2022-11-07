@@ -23,7 +23,6 @@ def fill_eval(driver, url, elements, submit = False, lecturer = False):
         driver.find_element(By.XPATH, '//*[starts-with(@id,"id_multichoice_")]').send_keys((Keys.TAB * i), elements[i])
 
     if submit:
-        time.sleep(2)
+        time.sleep(1)
         driver.find_element(By.LINK_TEXT, "Submit your answers").click()
         print("Evaluation Submitted.")
-
