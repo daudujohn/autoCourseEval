@@ -11,6 +11,7 @@ pip install -r requirements.txt
 ```
 - Create a .env file inside the main autoCourseEval folder
 - Let the .env file contain a username and a password 
+![.env format](https://user-images.githubusercontent.com/97765765/200183996-776263b7-6f32-4895-9adb-66e6fb9cadbd.png)
 - Open main.py
 - Set the `submit` arguement to `True` to allow autoCourseEval submit the form
 - Set the `Lecturer` arguement to `True` to fill in lecturer names for each week yourself
