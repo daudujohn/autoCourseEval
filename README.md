@@ -40,7 +40,7 @@ fill_eval(driver, url, elements, submit=False, lecturer=False)
 
 
 ## Contributors
-- [Miracle]()
+- [Miracle](https://www.github.com/Gamaliel51)
 - [Daniel](https://www.github.com/ch1n3du)
 - [King_Mikky](https://www.github.com/mikky-j)
 - [John](https://www.github.com/daudujohn)
