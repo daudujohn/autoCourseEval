@@ -1,2 +1,0 @@
- 
-        # "firefox": webdriver.Firefox(GeckoDriverManager()), 
