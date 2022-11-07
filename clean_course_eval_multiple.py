@@ -20,18 +20,8 @@ from selenium.webdriver.edge.service import Service
 import fill_eval
 import moodle_login
 
-# TODO : add "submit immediately parameter"
-# TODO : download all driver extentions and add to path
-# FIXME : Find how to know the user's browser build for the correct driver
-# TODO : add browser parameter
-# TODO : add error handling
-# TODO : Allow multiple url
-# TODO : Create virtual env for package installation
-# TODO: Make a log.txt that includes current time and date, browser version and course eval status
-# TODO: Write scripts to install requirements for different os
 
-
-def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select_values = [
+def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", form_values = [
     'A', 
     'D',
     'D', 
@@ -63,17 +53,23 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
     'A', 
     'Dr. ', 
     'G'
-], submit = False, lecturer = False):
+], course_id  = ['9472', '9435', '9454', '9456', '9457', '9458', '9460', '9461', '9462', '8803', '8644', '8606', '8607'], submit = False, lecturer = False):
+   
     """
-    It takes in a list of values and then uses those values to fill in a form on a webpage
+    It takes in a list of course ids, a list of form values to be selected and filled in the course evaluation, and a
+    boolean value to determine whether to submit the evaluation or not. It then goes through the course
+    ids, checks if there's a course evaluation for each course, and if there is, it fills the evaluation
+    with the values in the list of form values
     
-    :param browser: The browser to use, defaults to chrome (optional)
-    :param link: The link to the web page, defaults to https://moodle.cu.edu.ng/ (optional)
-    :param select_values: A list of values to be selected in the course evaluation
-    :param submit: If set to True, the script will submit the form. If set to False, the script will
-    only fill the form, defaults to False (optional)
+    :param browser: The browser to be used, defaults to chrome (optional)
+    :param link: The link to the moodle page, defaults to https://moodle.cu.edu.ng (optional)
+    :param form_values: A list of values to be selected in the course evaluation form
+    :param course_id: A list of the course ids of the courses you want to evaluate
+    :param submit: If set to True, the script will submit the evaluation. If set to False, the script
+    will only fill the evaluation, defaults to False (optional)
+    :param lecturer: To fill each lecturer's name per form, set this to True, defaults to False
+    (optional)
     """
-
    # A dictionary of browsers and their corresponding webdriver.
     browsers = {
         "chrome": [webdriver.Chrome, ChromeDriverManager().install(), "browserVersion"],
@@ -99,23 +95,23 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
 
                 driver.get(link)
 
-    # driver.find_element(By.XPATH, '//*[@id="page-wrapper"]/nav/ul[2]/li[2]/div/span/a').click()
+    driver.find_element(By.XPATH, '//*[@id="page-wrapper"]/nav/ul[2]/li[2]/div/span/a').click()
 
     moodle_login.moodle_login(driver=driver)
 
-    course_id  = ['9472', '9435', '9454', '9456', '9457', '9458', '9460', '9461', '9462', '8803', '8644', '8606', '8607']
+    
 
     try:
         for i in range (len(course_id)):
             url = f'https://moodle.cu.edu.ng/course/view.php?id={course_id[i]}'
             driver.get(url)
             try:
-                WebDriverWait(driver, 2).until(EC.alert_is_present())
+                # WebDriverWait(driver, 2).until(EC.alert_is_present())
                 alert = driver.switch_to.alert
                 alert.accept()
                 print("alert accepted")
             except (selenium.common.exceptions.NoAlertPresentException, selenium.common.exceptions.TimeoutException) as e:
-                print(e)
+                print('no alert 1')
 
             course_title = driver.title[8:14]
             if "ALPHA MID-SEMESTER COURSE EVALUATION FOR 2022/2023 FOR ALL STUDENTS IS NOW OPENED" in driver.page_source: 
@@ -127,7 +123,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
                     url = driver.find_element(By.LINK_TEXT, 'Answer the questions').get_attribute('href')
                     driver.find_element(By.LINK_TEXT, 'Answer the questions').click()
 
-                    fill_eval.fill_eval(driver=driver, url=url, elements=select_values, submit=submit, lecturer=lecturer)
+                    fill_eval.fill_eval(driver=driver, url=url, elements=form_values, submit=submit, lecturer=lecturer)
 
                     driver.execute_script("window.history.go(-2)")
 
@@ -136,7 +132,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
                         alert.accept()
                         print("alert accepted")
                     except (selenium.common.exceptions.NoAlertPresentException, selenium.common.exceptions.TimeoutException) as e:
-                        print(e)
+                        print('no alert 2')
 
                 except AssertionError:
                     driver.execute_script("window.history.go(-1)")
@@ -165,6 +161,12 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
                                     navigate = Select(driver.find_element(By.ID, "jump-to-activity"))
                                     navigate_options = navigate.options
                                     navigate.select_by_visible_text(navigate_options_value[i])
+                                    try:
+                                        alert = driver.switch_to.alert
+                                        alert.accept()
+                                        print("alert accepted")
+                                    except (selenium.common.exceptions.NoAlertPresentException, selenium.common.exceptions.TimeoutException) as e:
+                                        print('no alert 3')
                                     driver.find_element(By.ID, "jump-to-activity").send_keys(Keys.ENTER)
                                     if "ALPHA MID-SEMESTER COURSE EVALUATION FOR 2022/2023 FOR ALL STUDENTS IS NOW OPENED" in driver.page_source: 
                                         main_eval = False
@@ -176,7 +178,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
                                                     print(f'{navigate_options_value[i]}: New course evaluation found')
                                                     url = driver.find_element(By.LINK_TEXT, 'Answer the questions').get_attribute('href')
                                                     driver.find_element(By.LINK_TEXT, 'Answer the questions').click()
-                                                    fill_eval.fill_eval(driver=driver, url=url, elements=select_values, submit=submit, lecturer=lecturer)
+                                                    fill_eval.fill_eval(driver=driver, url=url, elements=form_values, submit=submit, lecturer=lecturer)
 
 
                                                 except AssertionError:
@@ -194,8 +196,15 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", select
         
     except selenium.common.exceptions.NoSuchElementException:
         print('Element not found')
+    # except (selenium.common.exceptions.TimeoutException, selenium.common.exceptions.UnexpectedAlertPresentException) as e:
+    #     try:
+    #         alert = driver.switch_to.alert
+    #         alert.accept()
+    #         print("alert accepted")
+    #         print(e)
+    #     except selenium.common.exceptions.NoAlertPresentException:
+    #         print('no alert')
 
  
     driver.close()
     driver.quit()
-
