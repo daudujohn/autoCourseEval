@@ -170,7 +170,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", form_v
                                     driver.find_element(By.ID, "jump-to-activity").send_keys(Keys.ENTER)
                                     if "ALPHA MID-SEMESTER COURSE EVALUATION FOR 2022/2023 FOR ALL STUDENTS IS NOW OPENED" in driver.page_source: 
                                         main_eval = False
-                                        if 'course evaluation' in driver.page_source:
+                                        if 'course evaluation' in driver.page_source or 'COURSE EVALUATION' in driver.page_source:
                                             main_eval = True
                                             if main_eval:
                                                 try:
