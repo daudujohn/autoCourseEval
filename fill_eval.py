@@ -24,5 +24,5 @@ def fill_eval(driver, url, elements, submit = False, lecturer = False):
 
     if submit:
         time.sleep(1)
-        driver.find_element(By.LINK_TEXT, "Submit your answers").click()
+        driver.find_element(By.ID, "id_savevalues").click()
         print("Evaluation Submitted.")
