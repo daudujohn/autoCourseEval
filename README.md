@@ -54,3 +54,6 @@ Tests for autoCourseEval were held under bandwidth speeds of **at least 1mb per 
 2. chrome://flags -> Search for WebGL in the search bar -> Enable / Activate WebGL
 
 There are much better instructions [here](https://superuser.com/questions/836832/how-can-i-enable-webgl-in-my-browser)
+
+
+*All drivers used in this project were gotten from the official [chrome](https://chromedriver.chromium.org/downloads) and [edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#installation) websites. They have only been renamed for the purpose of this project.*
