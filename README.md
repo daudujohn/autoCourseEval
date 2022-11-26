@@ -57,3 +57,6 @@ There are much better instructions [here](https://superuser.com/questions/836832
 
 ---
 *All drivers used in this project were gotten from the official [chrome](https://chromedriver.chromium.org/downloads) and [edge](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#installation) websites. They have only been renamed for the purpose of this project.*
+
+## License
+This project is licensed under the Apache-2.0 license, more details [here](https://github.com/daudujohn/autoCourseEval/blob/main/License.md)
