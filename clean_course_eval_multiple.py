@@ -114,7 +114,7 @@ def autoCourseEval(browser = "chrome", link = "https://moodle.cu.edu.ng", form_v
                 print('no alert 1')
 
             course_title = driver.title[8:14]
-            if "ALPHA MID-SEMESTER COURSE EVALUATION FOR 2022/2023 FOR ALL STUDENTS IS NOW OPENED" in driver.page_source: 
+            if "ALPHA MID-SEMESTER COURSE EVALUATION FOR 2022/2023 FOR ALL STUDENTS IS NOW OPENED" or 'ALPHA SEMESTER EXAM COURSE EVALUATION FOR 2022/2023 FOR ALL STUDENTS IS NOW OPENED' in driver.page_source: 
                 url = f'https://moodle.cu.edu.ng/mod/feedback/view.php?id=27536&courseid={course_id[i]}'
                 driver.get(url)
                 try:
